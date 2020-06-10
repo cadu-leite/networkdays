@@ -79,18 +79,24 @@ class JobSchedule:
         Returns:
             list: workday datetime.date list
         '''
+        # number of workdays based on daily hours
         workdays_number = int(self.duration // self.workhours)
         r = self.duration % self.workhours
+        # check if need a partial day of work
         if r != 0:
             workdays_number += 1
 
         if self.networkdays is None:
             delta = datetime.timedelta(days=workdays_number)
             date_end = self.date_start + delta
-            self.networkdays = Networkdays(self.date_start, date_end)
+            self.networkdays = Networkdays(self.date_start, date_end)\
+
         workdays = self.networkdays.networkdays()
         if workdays_number < len(workdays):
+            # only workdays and not the entire calendar
+            # todo: set a "borrow" flag, when last workday > date_end
             workdays = workdays[:workdays_number]
+
         return workdays
 
 
