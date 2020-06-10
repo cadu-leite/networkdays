@@ -99,3 +99,24 @@ class TestClassJobSchedule(unittest.TestCase):
 
         self.assertEqual(days, days_shouldbe, msg='3 days for 8.5hs job in 3.5hs workday')
 
+    def test_job_schedule_regards_jobs_startdate(self):
+        '''
+        Takes into account  the job start date, without ignore the networkdays calendar
+        '''
+        networkdays = Networkdays(
+            datetime.date(2020, 11, 1),
+            datetime.date(2020, 11, 30),
+            )
+
+        jobworkday = JobSchedule(8.5, 3.5, datetime.date(2020, 11, 7), networkdays)
+        days = jobworkday.job_workdays()
+
+        days_shouldbe = [
+            datetime.date(2020, 11, 9),
+            datetime.date(2020, 11, 10),
+            datetime.date(2020, 11, 11),
+            ]
+
+        self.assertEqual(days, days_shouldbe, msg='3 days for 8.5hs job in 3.5hs workday')
+
+

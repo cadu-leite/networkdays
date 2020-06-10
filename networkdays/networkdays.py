@@ -92,10 +92,20 @@ class JobSchedule:
             self.networkdays = Networkdays(self.date_start, date_end)\
 
         workdays = self.networkdays.networkdays()
+
+        # job schedule starts on date_start of the job
+        # look for the closest date  of date_start to start the job
+        while True:
+            try:
+                first_day_job = workdays.index(self.date_start)
+                break
+            except ValueError:
+                self.date_start += datetime.timedelta(days=1)
+
         if workdays_number < len(workdays):
             # only workdays and not the entire calendar
             # todo: set a "borrow" flag, when last workday > date_end
-            workdays = workdays[:workdays_number]
+            workdays = workdays[first_day_job:first_day_job+workdays_number]
 
         return workdays
 
