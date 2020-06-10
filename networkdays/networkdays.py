@@ -12,21 +12,21 @@ class Networkdays:
     def networkdays(self):
         '''
         NetWorkDays like Excel Networkdays function.
-        given 2 dates, the return will the number of days bewteen dates, minus
-        hoilidays, e week days off (ex.: saturday and sunday).
+        given 2 dates, the return will the number of days between dates, minus
+        holidays, e week days off (ex.: saturday and sunday).
 
-        The `weekdaysoff` is a per week iso days list where Monday is 1 and sunday is 7.
+        The `weekdaysoff` is a per week ISO days list where Monday is 1 and sunday is 7.
         The holidays may be any single date, datetime.date object, in a year.
 
         Args:
             date_start (datetime.date): initial date
             date_end (datetime.date): end date, or if none, is the last day of the
                 date_start year.
-            workdays (set): set (list) of workin days in iso format,
+            workdays (set): set (list) of working days in ISO format,
                 Monday is 1 and Sunday is 7.
             holidays (set): datetime object set, indicating days off.
             weekdaysoff (set): set of weekdays not working,
-                default is saturday and sunday {6,7}.
+                default is Saturday and Sunday {6,7}.
 
         returns:
             list of work days.
@@ -61,7 +61,7 @@ class JobSchedule:
     def __init__(self, duration, workhours, date_start, networkdays=None):
         '''
          Args:
-            duration (int/decimal): job duratin on hours
+            duration (int/decimal): job duration on hours
             workhours (int/decimal):
             date_start: a base date to start count
             networkdays: a Networkdays instance.
