@@ -58,18 +58,18 @@ class Networkdays:
 
 class JobSchedule:
 
-    def __init__(self, duration, workhours, date_start, networkdays=None):
+    def __init__(self, project_duration_hours, workhours_per_day, date_start, networkdays=None):
         '''
          Args:
-            duration (int/decimal): job duration on hours
-            workhours (int/decimal):
+            project_duration_hours (int/decimal): job duration on hours
+            workhours_per_day (int/decimal):
             date_start: a base date to start count
             networkdays: a Networkdays instance.
 
         '''
-        self.duration = duration
+        self.project_duration_hours = project_duration_hours
         self.date_start = date_start
-        self.workhours = workhours
+        self.workhours_per_day = workhours_per_day
         self.networkdays = networkdays
 
     def job_workdays(self):
@@ -80,8 +80,8 @@ class JobSchedule:
             list: workday datetime.date list
         '''
         # number of workdays based on daily hours
-        workdays_number = int(self.duration // self.workhours)
-        r = self.duration % self.workhours
+        workdays_number = int(self.project_duration_hours // self.workhours_per_day)
+        r = self.project_duration_hours % self.workhours_per_day
         # check if need a partial day of work
         if r != 0:
             workdays_number += 1
