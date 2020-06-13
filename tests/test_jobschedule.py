@@ -120,3 +120,100 @@ class TestClassJobSchedule(unittest.TestCase):
         self.assertEqual(days, days_shouldbe, msg='3 days for 8.5hs job in 3.5hs workday')
 
 
+    def test_job_schedule_get_years(self):
+        '''
+        Takes into account  the job start date, without ignore the networkdays calendar
+        '''
+        networkdays = Networkdays(
+            datetime.date(2020, 12, 23),
+            datetime.date(2021, 1, 4),
+            )
+
+        jobworkday = JobSchedule(80, 8, datetime.date(2020, 11, 7), networkdays)
+
+        self.assertEqual(list(jobworkday.years()),[2020, 2021] )
+
+
+    def test_job_schedule_get_months(self):
+        '''
+        Takes into account  the job start date, without ignore the networkdays calendar
+        '''
+        networkdays = Networkdays(
+            datetime.date(2020, 12, 23),
+            datetime.date(2021, 1, 4),
+            )
+
+        jobschedule = JobSchedule(80, 8, datetime.date(2020, 11, 7), networkdays)
+
+        self.assertEqual(list(jobschedule.months()),[12, 1] )
+
+
+    def test_job_schedule_get_months_filter(self):
+        '''
+        Takes into account  the job start date, without ignore the networkdays calendar
+        '''
+        networkdays = Networkdays(
+            datetime.date(2020, 12, 23),
+            datetime.date(2021, 1, 4),
+            )
+
+        jobschedule = JobSchedule(80, 8, datetime.date(2020, 11, 7), networkdays)
+
+        self.assertEqual(list(jobschedule.months(year=2021)),[1,] )
+
+
+    def test_job_schedule_get_weeks(self):
+        '''
+        Takes into account  the job start date, without ignore the networkdays calendar
+        '''
+        schdl_start = datetime.date(2021, 1, 3) # the year dint start on monday!
+        schdl_finish = datetime.date(2021, 1, 31)
+
+        networkdays = Networkdays(schdl_start, schdl_finish)
+
+        jobschedule = JobSchedule(5000, 8, schdl_start, networkdays)
+
+        self.assertEqual(list(jobschedule.weeks()),[1, 2, 3, 4] )
+
+
+    def test_job_schedule_get_weeks_filter_year(self):
+        '''
+
+        '''
+        schdl_start = datetime.date(2020, 12, 1)
+        schdl_finish = datetime.date(2021, 1, 31)
+
+        networkdays = Networkdays(schdl_start, schdl_finish)
+
+        jobschedule = JobSchedule(5000, 8, schdl_start, networkdays)
+
+        self.assertEqual(list(jobschedule.weeks(year=2021)),[53, 1, 2, 3, 4] )
+
+
+    def test_job_schedule_get_weeks_filter_month(self):
+        '''
+
+        '''
+        schdl_start = datetime.date(2020, 12, 1)
+        schdl_finish = datetime.date(2021, 1, 31)
+
+        networkdays = Networkdays(schdl_start, schdl_finish)
+
+        jobschedule = JobSchedule(5000, 8, schdl_start, networkdays)
+
+        self.assertEqual(list(jobschedule.weeks(month=1)),[53, 1, 2, 3, 4] )
+
+
+    def test_job_schedule_get_weeks_filter_y_nd_m(self):
+        '''
+
+        '''
+        schdl_start = datetime.date(2020, 10, 1)
+        schdl_finish = datetime.date(2021, 1, 31)
+
+        networkdays = Networkdays(schdl_start, schdl_finish)
+
+        jobschedule = JobSchedule(5000, 8, schdl_start, networkdays)
+
+        self.assertEqual(list(jobschedule.weeks(year=2020, month=11)),[ 45, 46, 47, 48, 49] )
+
