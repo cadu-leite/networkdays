@@ -72,6 +72,14 @@ class JobSchedule:
         self.workhours_per_day = workhours_per_day
         self.networkdays = networkdays
 
+        self.jobdays = self.job_workdays()
+
+        self.bussines_days = len(self.jobdays)
+        self.total_days = self.jobdays[-1] - self.jobdays[0]
+        self.prj_starts= self.jobdays[0].strftime('%x')  # todo: localization ....
+        self.prj_ends= self.jobdays[-1].strftime('%x')  # set location
+
+
     def job_workdays(self):
         '''
         list workdays for a given job duration
