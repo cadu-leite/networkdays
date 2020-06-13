@@ -6,7 +6,7 @@ class Networkdays:
     def __init__(self, date_start, date_end=None, holidays=set(), weekdaysoff={6,7}):
         self.date_start = date_start
         self.date_end = date_end
-        self.holidays = holidays
+        self.holidays_set = holidays
         self.weekdaysoff = weekdaysoff
 
     def networkdays(self):
@@ -39,21 +39,36 @@ class Networkdays:
                 weekdaysoff={6,7}
             )
 
-
         '''
 
         date_diff = self.date_end - self.date_start
-        workdays = {
+        dates = {
+            self.date_start + datetime.timedelta(days=days)
+            for days in range(0, (date_diff.days+1))
+        }
+
+        dates = dates.difference(self.weekends())
+        dates = dates.difference(self.holidays())
+        dates = sorted(dates)
+
+        return dates
+
+    def weekends(self):
+        date_diff = self.date_end - self.date_start
+        dates = {
             self.date_start + datetime.timedelta(days=days)
             for days in range(0, (date_diff.days+1))
             if (self.date_start + datetime.timedelta(days=days)).isoweekday()
-            not in self.weekdaysoff
+            in self.weekdaysoff
         }
+        return dates
 
-        workdays = workdays.difference(self.holidays)
-        workdays = sorted(workdays)
+    def holidays(self):
 
-        return workdays
+        return list(
+            filter(lambda d: self.date_end >= d >= self.date_start,
+                self.holidays_set)
+        )
 
 
 class JobSchedule:
@@ -144,7 +159,7 @@ class JobSchedule:
 
     def weeks(self, year=None, month=None):
         """
-        return a `interator`
+        return an `interator`
         for ISO format see
         https://docs.python.org/3/library/datetime.html#datetime.date.isocalendar)
 

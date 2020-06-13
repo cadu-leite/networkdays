@@ -13,7 +13,7 @@ class TestClassNetworkDays(unittest.TestCase):
 
         number_wds_per_month_2020=[
             (datetime.date(2020, 1, 1), datetime.date(2020, 1, 31), 23.00, {}),
-            (datetime.date(2020, 2, 1), datetime.date(2020, 2, 28), 20.00, {}),
+            (datetime.date(2020, 2, 1), datetime.date(2020, 2, 29), 20.00, {}),
             (datetime.date(2020, 3, 1), datetime.date(2020, 3, 31), 22.00, {}),
             (datetime.date(2020, 4, 1), datetime.date(2020, 4, 30), 22.00, {}),
             (datetime.date(2020, 5, 1), datetime.date(2020, 5, 31), 21.00, {}),
@@ -60,3 +60,30 @@ class TestClassNetworkDays(unittest.TestCase):
             {1, 2, 3, 4, 5, 6})  # week days off
         workdays = networkdays.networkdays()
         self.assertEqual(len(workdays), 4, msg='fail weekdaysoff 1')
+
+    def test_networkdays_calc_weekends_number(self):
+        '''
+        number of daysoff per month on 2020
+        '''
+
+        dates_2020=[
+            (datetime.date(2020, 1, 1), datetime.date(2020, 1, 31), 8, {}),
+            (datetime.date(2020, 2, 1), datetime.date(2020, 2, 29), 9, {}),
+            (datetime.date(2020, 3, 1), datetime.date(2020, 3, 31), 9, {}),
+            (datetime.date(2020, 4, 1), datetime.date(2020, 4, 30), 8, {}),
+            (datetime.date(2020, 5, 1), datetime.date(2020, 5, 31), 10, {}),
+            (datetime.date(2020, 6, 1), datetime.date(2020, 6, 30), 8, {}),
+            (datetime.date(2020, 7, 1), datetime.date(2020, 7, 31), 8, {}),
+            (datetime.date(2020, 8, 1), datetime.date(2020, 8, 30), 10, {}),
+            (datetime.date(2020, 9, 1), datetime.date(2020, 9, 30), 8, {}),
+            (datetime.date(2020, 10, 1), datetime.date(2020, 10, 31), 9, {}),
+            (datetime.date(2020, 11, 1), datetime.date(2020, 11, 30), 9, {}),
+            (datetime.date(2020, 12, 1), datetime.date(2020, 12, 31), 8, {}),
+        ]
+
+        for date in dates_2020:
+            with self.subTest(date=date):
+                networkdays = Networkdays(date[0], date[1], date[3])
+                # 2020 Jun, has 22 work days considering no holidays
+                self.assertEqual(len(networkdays.weekends()), date[2], msg='Class Test fail -> datastart=%s | holidays=%s' % (date[0], date[3]))
+
