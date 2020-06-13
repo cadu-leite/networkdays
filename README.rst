@@ -8,8 +8,14 @@ Networkdays functions ...  including `networkdays` excel like function
 
 
 
+
 Example
 =======
+
+
+.. include:: tests/test_jobschedule.py
+   :start-line: 10
+   :enf-line: 25
 
 
 Given September 2020::
