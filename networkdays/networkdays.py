@@ -1,5 +1,5 @@
 import datetime
-
+from itertools import groupby
 
 class Networkdays:
 
@@ -117,4 +117,52 @@ class JobSchedule:
 
         return workdays
 
+
+    def years(self):
+        '''
+        Its not duration
+        '''
+        return iter(range(
+            self.jobdays[0].year,
+            self.jobdays[-1].year + 1
+        ))
+
+    def months(self, year=None):
+        """return a weeks `iterATOR`
+
+        Args:
+            year (None, optional): Description
+
+        Returns:
+            TYPE: Description
+        """
+        days = self.jobdays
+        if year:
+            days = filter(lambda x:x.year==year, days)
+        return iter([year for year, days_per_year in groupby(days, lambda x: x.month)])
+
+
+    def weeks(self, year=None, month=None):
+        """
+        return a `interator`
+        for ISO format see
+        https://docs.python.org/3/library/datetime.html#datetime.date.isocalendar)
+
+        Args:
+            year (None, optional): filter per year
+            month (None, optional): filter per month
+
+        Returns:
+            iter: weeks iso numbers based
+        """
+        days = self.jobdays
+        if year:
+            days = filter(lambda x:x.year==year, days)
+        if month:
+            days = filter(lambda x:x.month==month, days)
+
+        return iter([weeks for weeks, days_per_year in groupby(days, lambda x: x.isocalendar()[1])])
+
+    def days(self):
+        return iter(self.jobdays)
 
