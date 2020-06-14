@@ -1,111 +1,153 @@
-
 ***********
 Networkdays
 ***********
 
 
-Networkdays functions ...  including `networkdays` excel like function
+- Business days calendar.
+- JobSchedule on business days.
+
+.. tip::
+
+    **Just Python built-in libs, no dependencies**
+
+
+Networkdays:
+    Return working days between two dates exclude weekends and holidays.
+
+    - just like spreadsheets `networdays` function
+    - exclude Holidays
+    - Exclude "days off" per week.
+
+
+Job schedule:
+    Calculate the period for a given job hours, based on `Networdays`.
 
 
 
-
-Example
-=======
+.. contents:: Table of Contents
 
 
-.. include:: tests/test_jobschedule.py
-   :start-line: 10
-   :enf-line: 25
 
+Examples
+========
 
-Given September 2020::
+Networkdays.networkdays()
+-------------------------
 
-       September 2020
-    Mo Tu We Th Fr Sa Su
-        1  2  3  4  5  6
-     7  8  9 10 11 12 13  Monday, 7 - Brazil Independence day.
-    14 15 16 17 18 19 20
-    21 22 23 24 25 26 27
-    28 29 30
+.. code:: python
 
+    # Networkdays, given  December 2020, calendar...
+    #
+    #  December 2020
+    #  Mo Tu We Th Fr Sa Su
+    #      1  2  3  4  5  6
+    #   7  8  9 10 11 12 13
+    #  14 15 16 17 18 19 20
+    #  21 22 23 24 25 26 27
+    #  28 29 30 31
 
-Workdays between 1 to 10 September 2020
----------------------------------------
-
-.. code-block:: python
-
-    import datetime
-    from networkdays import networkdays
-    nwds = networkdays.Networkdays(
-        datetime.date(2020, 9, 1), datetime.date(2020, 9, 10),
-        holidays=[datetime.date(2020, 9, 7)]  # Brazil independence day
-    )
-    workdays = nwds.networkdays()
-
-    print(f'dates: {workdays}')
-
-    print(f'Number of Workdays for November: {len(workdays)}')
-
-Returns workdays between September 1 - 10 ::
-
-    dates: [
-        datetime.date(2020, 9, 1),datetime.date(2020, 9, 2),datetime.date(2020, 9, 3),datetime.date(2020, 9, 4),
-        datetime.date(2020, 9, 8),datetime.date(2020, 9, 9),datetime.date(2020, 9, 10)
-    ]
-
-    Number of Workdays for November 1-10: 7
-
-
-55hs Job Schedule starting 1 September 2020 - workday 8hs /day
---------------------------------------------------------------
-
-
-.. code-block:: python
 
     import datetime
     from networkdays import networkdays
 
-    # 55hs job for 8hs/day, starting 1 September 2020.
-    schdl = networkdays.JobSchedule(55, 8, datetime.date(2020, 7, 1))
-    schdl.job_workdays()
-
-returns ::
-
-    [datetime.date(2020, 7, 1),
-     datetime.date(2020, 7, 2),
-     datetime.date(2020, 7, 3),
-     datetime.date(2020, 7, 6),
-     datetime.date(2020, 7, 7),
-     datetime.date(2020, 7, 8)]
-
-
-...   7 September is National Holiday
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-.. code-block:: python
-
-
-    nwds = networkdays.Networkdays(
-        datetime.date(2020, 9, 1), datetime.date(2020, 9, 10), # date start -> end
-        holidays=[datetime.date(2020, 9, 7)],  # datetime.date holidays list
-        weekdaysoff = {6,7} # iso weekdays indicating week days off.
-    )
-    workdays = nwds.networkdays()
-
-    schdl = networkdays.JobSchedule(55, 8, datetime.date(2020, 9, 1), nwds)
-    schdl.job_workdays()
-
-results ::
-
-    [
-        datetime.date(2020, 9, 1),
-        datetime.date(2020, 9, 2),
-        datetime.date(2020, 9, 3),
-        datetime.date(2020, 9, 4),
-        datetime.date(2020, 9, 8),
-        datetime.date(2020, 9, 9),
-        datetime.date(2020, 9, 10)
+    HOLIDAYS  = [
+        datetime.date(2020, 12, 25), # World Peace Day
+        datetime.date(2020, 9, 7),   # a **fake** holiday out of period
     ]
+
+    # networkdays between 2020-12-01 and 2020-12-31 and week days off *default*(Sut and Sun)
+    days = networkdays.Networkdays(datetime.date(2020, 12, 1), datetime.date(2020, 12, 31), holidays=HOLIDAYS)
+    print(days.networkdays())
+
+
+results ...
+
+.. parsed-literal::
+
+    [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2),
+    datetime.date(2020, 12, 3), datetime.date(2020, 12, 4),
+    ...
+    datetime.date(2020, 12, 28), datetime.date(2020, 12, 29),
+    datetime.date(2020, 12, 30), datetime.date(2020, 12, 31)]
+
+
+.. code:: python
+
+    # you have methods to get holidays and weekends date list as well.
+    # here i just got the size of each set
+    print(f'''
+    Qtt bussines days: {len(days.networkdays())}
+    Qtt Weekends: {len(days.weekends())}
+    Qtt Holidays: {len(days.holidays())}
+    ''')
+    print(days.weekends())
+
+
+.. parsed-literal::
+
+    Dates work: 22
+    Dates Weekends: 8
+    Dates Holidays: 1
+
+    [datetime.date(2020, 12, 5), datetime.date(2020, 12, 6),
+    datetime.date(2020, 12, 12), datetime.date(2020, 12, 13),
+    datetime.date(2020, 12, 19), datetime.date(2020, 12, 20),
+    datetime.date(2020, 12, 26), datetime.date(2020, 12, 27)]
+
+
+Networkdays.jobschedule()
+-------------------------
+
+.. code:: python
+
+    # jobSchedule
+    import datetime
+
+    from networkdays import networkdays
+    DATE_START = datetime.date(2020, 12, 1)
+
+    # Distribute the 600 hrs of effort, starting on december 1, 2020 workin 8hrs per day.
+    jobschedule = networkdays.JobSchedule(600, 8, DATE_START, networkdays=None)
+    job_dates = jobschedule.job_workdays()
+
+.. code:: python
+
+    print(f'''
+    project_duration_hours: {jobschedule.project_duration_hours}'
+    date_start:             {jobschedule.date_start}
+    workhours_per_day:      {jobschedule.workhours_per_day}
+
+    bussines days:          {jobschedule.bussines_days}
+    calendar days:          {jobschedule.total_days}
+    starts:                 {jobschedule.prj_starts}
+    ends:                   {jobschedule.prj_ends}
+
+    years:                  {list(jobschedule.years())}
+    months:                 {list(jobschedule.months())}
+    weeks (ISO):            {list(jobschedule.weeks())}
+    days:                   {list(jobschedule.days())[:2]} ...\n\t\t\t ...{list(jobschedule.days())[-2:]}
+    Works days dates on january: {list(jobschedule.days())[:2]} ...\n\t\t\t ...{list(jobschedule.days())[-2:]}
+    ''')
+
+
+.. parsed-literal::
+
+
+    project_duration_hours: 600'
+    date_start:             2020-12-01
+    workhours_per_day:      8
+
+    bussines days:          54
+    calendar days:          73 days, 0:00:00
+    starts:                 12/01/20
+    ends:                   02/12/21
+
+    years:                  [2020, 2021]
+    months:                 [12, 1, 2]
+    weeks (ISO):            [49, 50, 51, 52, 53, 1, 2, 3, 4, 5, 6]
+    days:                   [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)] ...
+                 ...[datetime.date(2021, 2, 11), datetime.date(2021, 2, 12)]
+    Works days dates on january: [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)] ...
+                 ...[datetime.date(2021, 2, 11), datetime.date(2021, 2, 12)]
 
 
