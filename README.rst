@@ -23,14 +23,40 @@ Job schedule:
     Calculate the period for a given job hours, based on `Networdays`.
 
 
-
 .. contents:: Table of Contents
 
+
+Installation
+============
+
+python-networkdays can be installed from PyPI using pip
+
+.. code-block:: bash
+
+    pip install python-networkdays
+
+.. tip:: note that the package name is different from the importable name
+
+Page on Pypi: https://pypi.org/project/python-networkdays/
+
+There is no dependencies.
+
+
+Features
+========
+
+- Return a list of business days between 2 dates.
+- Exclude weekends by default
+- Custom "days off" may be informed as list like {1,2,3,4,5,6,7}, where 1 is Monday default is {6,7} = (Sat, Sun).
+- How many business days between two dates.
+- How many days off, including holidays and weekends.
+- Return a list of business days for a given number of hours
+- Return a list of Years, months or weeks for a given number of hours
+- **No Pandas or NumPy dependencies**
 
 
 Examples
 ========
-
 
 Networkdays.networkdays()
 -------------------------
@@ -42,8 +68,7 @@ Networkdays.networkdays()
 
     HOLIDAYS  = { datetime.date(2020, 12, 25),}
 
-    days = networkdays.Networkdays(datetime.date(2020, 12, 1), datetime.date(2020, 12, 31), holidays=HOLIDAYS)
-
+    day
     # you have methods to get holidays and weekends date list as well.
     # here i just got the size of each set
     print(f'''
@@ -125,4 +150,28 @@ Networkdays.jobschedule()
     Works days dates on january:
         [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)] ...
      ...[datetime.date(2021, 2, 11), datetime.date(2021, 2, 12)]
+
+
+Other similar projects
+======================
+
+When I start to code, I did check for some similar projects.
+
+I knew about `python-dateutil <https://github.com/dateutil/dateutil>`_, a great project I use for years...
+I'd like something more straightforward or simpler.
+
+After to publish the python-networkdays on PyPi
+I found some others  8(
+
+- workdays_ : A 5 years old project, looks the same as networkdays_
+- timeboard_ : A more complex but powerful project
+- python-dateutil_ is great, powerful but even more complex.
+- python-bizdays_ : Quick simple and direct ...
+
+.. _workdays: https://pypi.org/project/workdays/
+.. _timeboard: https://github.com/mmamaev/timeboard
+.. _python-dateutil: https://github.com/dateutil/dateutil
+.. _python-bizdays: https://github.com/wilsonfreitas/python-bizdays
+
+I will try to keep this list updated...
 
