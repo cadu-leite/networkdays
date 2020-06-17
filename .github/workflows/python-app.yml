@@ -28,3 +28,6 @@ jobs:
     - name: Test with unitest
       run: |
         python -m unittest
+    - name: Test README.rst
+      run: |
+        python -m doctest README.rst

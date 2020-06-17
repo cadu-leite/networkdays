@@ -63,40 +63,20 @@ Networkdays.networkdays()
 
 .. code:: python
 
-    import datetime
-    from networkdays import networkdays
+    >>> import datetime
+    >>> from networkdays import networkdays
 
-    HOLIDAYS  = { datetime.date(2020, 12, 25),}
+    >>> HOLIDAYS = { datetime.date(2020, 12, 25) }
 
-    day
-    # you have methods to get holidays and weekends date list as well.
-    # here i just got the size of each set
-    print(f'''
-    Bussiness days: {len(days.networkdays())}
-        {days.networkdays()[:2]}
-        ...{days.networkdays()[-2:]}
-
-    Weekends:       {len(days.weekends())}
-        {days.weekends()[:2]}
-        ...{days.weekends()[-2:]}
-
-    Holidays:       {len(days.holidays())}
-    ''')
-
-
-.. parsed-literal::
-
-
-    Bussiness days: 22
-        [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)]
-        ...[datetime.date(2020, 12, 30), datetime.date(2020, 12, 31)]
-
-    Weekends:       8
-        [datetime.date(2020, 12, 5), datetime.date(2020, 12, 6)]
-        ...[datetime.date(2020, 12, 26), datetime.date(2020, 12, 27)]
-
-    Holidays:       1
-
+    >>> days = networkdays.Networkdays(datetime.date(2020, 12, 1), datetime.date(2020, 12, 25), HOLIDAYS) #todo: this was not defined before this, Cadu needs to define it
+    >>> # you have methods to get holidays and weekends date list as well.
+    >>> # here i just got the size of each set
+    >>> f'Bussiness days: {len(days.networkdays())} {days.networkdays()[:2]}...{days.networkdays()[-2:]}'
+    'Bussiness days: 18 [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)]...[datetime.date(2020, 12, 23), datetime.date(2020, 12, 24)]'
+    >>> f'Weekends: {len(days.weekends())} {days.weekends()[:2]} ...{days.weekends()[-2:]}'
+    'Weekends: 6 [datetime.date(2020, 12, 5), datetime.date(2020, 12, 6)] ...[datetime.date(2020, 12, 19), datetime.date(2020, 12, 20)]'
+    >>> f'Holidays: {len(days.holidays())}'
+    'Holidays: 1'
 
 
 Networkdays.jobschedule()
@@ -104,53 +84,25 @@ Networkdays.jobschedule()
 
 .. code:: python
 
-    # jobSchedule
-    import datetime
-    from networkdays import networkdays
-
-    # Distribute the 600 hrs of effort, starting on december 1, 2020 working 8hrs per day.
-    jobschedule = networkdays.JobSchedule(600, 8, datetime.date(2020, 12, 1), networkdays=None)
-    job_dates = jobschedule.job_workdays()
-
-    # print results ...
-    print(f'''
-
-    bussines days:          {jobschedule.bussines_days}
-    calendar days:          {jobschedule.total_days}
-    starts - ends:          {jobschedule.prj_starts} - {jobschedule.prj_ends}
-
-    years:                  {list(jobschedule.years())}
-    months:                 {list(jobschedule.months())}
-    weeks (ISO):            {list(jobschedule.weeks())}
-
-    days:
-        {list(jobschedule.days())[:2]} ...\n ...{list(jobschedule.days())[-2:]}
-
-    Works days dates on january:
-        {list(jobschedule.days())[:2]} ...\n ...{list(jobschedule.days())[-2:]}
-    ''')
-
-
-.. parsed-literal::
-
-
-
-    bussines days:          54
-    calendar days:          73 days, 0:00:00
-    starts - ends:          12/01/20 - 02/12/21
-
-    years:                  [2020, 2021]
-    months:                 [12, 1, 2]
-    weeks (ISO):            [49, 50, 51, 52, 53, 1, 2, 3, 4, 5, 6]
-
-    days:
-        [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)] ...
-     ...[datetime.date(2021, 2, 11), datetime.date(2021, 2, 12)]
-
-    Works days dates on january:
-        [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)] ...
-     ...[datetime.date(2021, 2, 11), datetime.date(2021, 2, 12)]
-
+    >>> # Distribute the 600 hrs of effort, starting on december 1, 2020 working 8hrs per day.
+    >>> jobschedule = networkdays.JobSchedule(600, 8, datetime.date(2020, 12, 1), networkdays=None)
+    >>> job_dates = jobschedule.job_workdays()
+    >>> jobschedule.bussines_days
+    54
+    >>> jobschedule.total_days
+    datetime.timedelta(days=73)
+    >>> jobschedule.prj_starts
+    '12/01/20'
+    >>> jobschedule.prj_ends
+    '02/12/21'
+    >>> list(jobschedule.years())
+    [2020, 2021]
+    >>> list(jobschedule.months())
+    [12, 1, 2]
+    >>> list(jobschedule.weeks()) # ISO
+    [49, 50, 51, 52, 53, 1, 2, 3, 4, 5, 6]
+    >>> f'days: {list(jobschedule.days())[:2]} ... {list(jobschedule.days())[-2:]}'
+    'days: [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)] ... [datetime.date(2021, 2, 11), datetime.date(2021, 2, 12)]'
 
 Other similar projects
 ======================
