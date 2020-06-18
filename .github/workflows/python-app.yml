@@ -27,4 +27,12 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --statistics
     - name: Test with unitest
       run: |
-        python -m unittest
+        coverage run -m unittest
+    - name: Test README.rst
+      run: |
+        python -m doctest README.rst
+    - name: Posting Coverage
+      env:
+        CODECOV_TOKEN: "10e15cf3-7920-4212-9a80-0219943f9b1c"
+      run: |
+        codecov
