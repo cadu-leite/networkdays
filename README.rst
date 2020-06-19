@@ -2,6 +2,14 @@
 Networkdays
 ***********
 
+-------------------------------------------
+
+.. image:: https://codecov.io/gh/cadu-leite/networkdays/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/cadu-leite/networkdays
+
+
+-------------------------------------------
+
 
 - Business days calendar.
 - JobSchedule on business days.
