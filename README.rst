@@ -4,9 +4,19 @@ Networkdays
 
 -------------------------------------------
 
+.. image:: https://img.shields.io/pypi/v/python-networkdays.svg?style=flat-square
+    :target: https://pypi.org/project/python-networkdays
+    :alt: pypi version
+
+
+.. image:: https://readthedocs.org/projects/networkdays/badge/?version=latest
+    :target: https://networkdays.readthedocs.io/?badge=latest
+    :alt: Documentation Status
+
+
 .. image:: https://codecov.io/gh/cadu-leite/networkdays/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/cadu-leite/networkdays
-
+    :alt: code coverage
 
 -------------------------------------------
 
