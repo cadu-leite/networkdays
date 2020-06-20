@@ -87,3 +87,20 @@ class TestClassNetworkDays(unittest.TestCase):
                 # 2020 Jun, has 22 work days considering no holidays
                 self.assertEqual(len(networkdays.weekends()), date[2], msg='Class Test fail -> datastart=%s | holidays=%s' % (date[0], date[3]))
 
+
+    def test_networkdays_bug_dateend_param_not_informed(self):
+        '''
+        Networkdays, when date_end is not informed,
+        date_end = date_start + 1 year
+        bug fix https://github.com/cadu-leite/networkdays/issues/13
+
+            date_diff = self.date_end - self.date_start
+            TypeError: unsupported operand type(s) for -: 'NoneType' and 'datetime.date'
+
+        '''
+
+        ndays_1 = Networkdays(datetime.date(2020, 6, 20))  # week days off
+        ndays_2 = Networkdays(datetime.date(2020, 6, 20), datetime.date(2021, 6, 20))  # week days off
+
+        self.assertEqual(ndays_1.networkdays(), ndays_2.networkdays(), msg='fail date_end as optional param')
+

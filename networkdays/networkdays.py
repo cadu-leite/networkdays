@@ -41,6 +41,14 @@ class Networkdays:
 
         '''
 
+        # if not dte_end, assume 1 year after (by calendar) date start
+        if self.date_end is None:
+            self.date_end = datetime.date(
+                self.date_start.year+1,
+                self.date_start.month,
+                self.date_start.day
+            )
+
         date_diff = self.date_end - self.date_start
         dates = {
             self.date_start + datetime.timedelta(days=days)
