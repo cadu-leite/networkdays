@@ -11,7 +11,7 @@ class TestClassNetworkDays(unittest.TestCase):
         number of workdays per month on 2020
         '''
 
-        number_wds_per_month_2020=[
+        number_wds_per_month_2020 = [
             (datetime.date(2020, 1, 1), datetime.date(2020, 1, 31), 23.00, {}),
             (datetime.date(2020, 2, 1), datetime.date(2020, 2, 29), 20.00, {}),
             (datetime.date(2020, 3, 1), datetime.date(2020, 3, 31), 22.00, {}),
@@ -27,7 +27,7 @@ class TestClassNetworkDays(unittest.TestCase):
             (datetime.date(2020, 12, 1), datetime.date(2020, 12, 31), 22.00, {
                 datetime.date(2020, 12, 25),  # a holiday
             }),
-            (datetime.date(2020, 8, 1),datetime.date(2020, 8, 30), 19.00, {
+            (datetime.date(2020, 8, 1), datetime.date(2020, 8, 30), 19.00, {
                 datetime.date(2020, 8, 7), datetime.date(2020, 8, 15),  # two holidays, but 1 on saturday
             }),
 
@@ -66,7 +66,7 @@ class TestClassNetworkDays(unittest.TestCase):
         number of daysoff per month on 2020
         '''
 
-        dates_2020=[
+        dates_2020 = [
             (datetime.date(2020, 1, 1), datetime.date(2020, 1, 31), 8, {}),
             (datetime.date(2020, 2, 1), datetime.date(2020, 2, 29), 9, {}),
             (datetime.date(2020, 3, 1), datetime.date(2020, 3, 31), 9, {}),
@@ -86,7 +86,6 @@ class TestClassNetworkDays(unittest.TestCase):
                 networkdays = Networkdays(date[0], date[1], date[3])
                 # 2020 Jun, has 22 work days considering no holidays
                 self.assertEqual(len(networkdays.weekends()), date[2], msg='Class Test fail -> datastart=%s | holidays=%s' % (date[0], date[3]))
-
 
     def test_networkdays_bug_dateend_param_not_informed(self):
         '''
