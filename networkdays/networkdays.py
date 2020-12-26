@@ -3,7 +3,7 @@ from itertools import groupby
 
 class Networkdays:
 
-    def __init__(self, date_start, date_end=None, holidays=set(), weekdaysoff={6,7}):
+    def __init__(self, date_start, date_end=None, holidays=set(), weekdaysoff={6, 7}):
         self.date_start = date_start
         self.date_end = date_end
         self.holidays_set = holidays
@@ -44,7 +44,7 @@ class Networkdays:
         # if not dte_end, assume 1 year after (by calendar) date start
         if self.date_end is None:
             self.date_end = datetime.date(
-                self.date_start.year+1,
+                self.date_start.year + 1,
                 self.date_start.month,
                 self.date_start.day
             )
@@ -52,7 +52,7 @@ class Networkdays:
         date_diff = self.date_end - self.date_start
         dates = {
             self.date_start + datetime.timedelta(days=days)
-            for days in range(0, (date_diff.days+1))
+            for days in range(0, (date_diff.days + 1))
         }
 
         dates = dates.difference(self.weekends())
@@ -65,7 +65,7 @@ class Networkdays:
         date_diff = self.date_end - self.date_start
         dates = [
             self.date_start + datetime.timedelta(days=days)
-            for days in range(0, (date_diff.days+1))
+            for days in range(0, (date_diff.days + 1))
             if (self.date_start + datetime.timedelta(days=days)).isoweekday()
             in self.weekdaysoff
         ]
@@ -75,8 +75,10 @@ class Networkdays:
     def holidays(self):
 
         return sorted(list(
-            filter(lambda d: self.date_end >= d >= self.date_start,
-                self.holidays_set)
+            filter(
+                lambda d: self.date_end >= d >= self.date_start,
+                self.holidays_set
+            )
         ))
 
 
@@ -100,9 +102,8 @@ class JobSchedule:
 
         self.bussines_days = len(self.jobdays)
         self.total_days = self.jobdays[-1] - self.jobdays[0]
-        self.prj_starts= self.jobdays[0].strftime('%x')  # todo: localization ....
-        self.prj_ends= self.jobdays[-1].strftime('%x')  # set location
-
+        self.prj_starts = self.jobdays[0].strftime('%x')  # todo: localization
+        self.prj_ends = self.jobdays[-1].strftime('%x')  # set location
 
     def job_workdays(self):
         '''
@@ -137,10 +138,9 @@ class JobSchedule:
         if workdays_number < len(workdays):
             # only workdays and not the entire calendar
             # todo: set a "borrow" flag, when last workday > date_end
-            workdays = workdays[first_day_job:first_day_job+workdays_number]
+            workdays = workdays[first_day_job:first_day_job + workdays_number]
 
         return workdays
-
 
     def years(self):
         '''
@@ -162,9 +162,8 @@ class JobSchedule:
         """
         days = self.jobdays
         if year:
-            days = filter(lambda x:x.year==year, days)
+            days = filter(lambda x: x.year == year, days)
         return iter([year for year, days_per_year in groupby(days, lambda x: x.month)])
-
 
     def weeks(self, year=None, month=None):
         """
@@ -181,12 +180,11 @@ class JobSchedule:
         """
         days = self.jobdays
         if year:
-            days = filter(lambda x:x.year==year, days)
+            days = filter(lambda x: x.year == year, days)
         if month:
-            days = filter(lambda x:x.month==month, days)
+            days = filter(lambda x: x.month == month, days)
 
         return iter([weeks for weeks, days_per_year in groupby(days, lambda x: x.isocalendar()[1])])
 
     def days(self):
         return iter(self.jobdays)
-
