@@ -12,17 +12,16 @@ class Networkdays:
     def networkdays(self):
         '''
         NetWorkDays like Excel Networkdays function.
-        Given 2 dates, it returns the number of days between the dates, minus
-        holidays, minus week days off (ex.: saturday and sunday).
+        given 2 dates, the return will the number of days between dates, minus
+        holidays, e week days off (ex.: saturday and sunday).
 
-        The `weekdaysoff` indicates days not worked per week in iso format (ex for Sun and Sat => {6,7})
-
-        Holidays may be any date, datetime.date object, in a year.
+        The `weekdaysoff` is a per week ISO days list where Monday is 1 and sunday is 7.
+        The holidays may be any single date, datetime.date object, in a year.
 
         Args:
             date_start (datetime.date): initial date
-            date_end (datetime.date): last date - if none, is the same as `date_start` plus 1 year.
-
+            date_end (datetime.date): end date, or if none, is the last day of the
+                date_start year.
             workdays (set): set (list) of working days in ISO format,
                 Monday is 1 and Sunday is 7.
             holidays (set): datetime object set, indicating days off.
