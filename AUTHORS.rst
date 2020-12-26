@@ -9,7 +9,7 @@ Contributors (alphabetical order)
 =================================
 
 
-- Carlos Leite (cadu-leite@github)
-
+- Carlos Leite (https://github.com/cadu-leite)
+- Renzo Nuccitelli (https://github.com/renzon)
 
 
