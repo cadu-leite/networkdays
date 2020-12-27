@@ -79,22 +79,45 @@ Examples
 Networkdays.networkdays()
 -------------------------
 
-.. code:: python
+.. code-block:: python
+    
+    In [1]: from networkdays import networkdays
 
-    >>> import datetime
-    >>> from networkdays import networkdays
+    In [2]: import datetime
 
-    >>> HOLIDAYS = { datetime.date(2020, 12, 25) }
+    In [3]: HOLIDAYS = { datetime.date(2020, 12, 25) }  # define a Holidays list
 
-    >>> days = networkdays.Networkdays(datetime.date(2020, 12, 1), datetime.date(2020, 12, 25), HOLIDAYS) #todo: this was not defined before this, Cadu needs to define it
-    >>> # you have methods to get holidays and weekends date list as well.
-    >>> # here i just got the size of each set
-    >>> f'Bussiness days: {len(days.networkdays())} {days.networkdays()[:2]}...{days.networkdays()[-2:]}'
-    'Bussiness days: 18 [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)]...[datetime.date(2020, 12, 23), datetime.date(2020, 12, 24)]'
-    >>> f'Weekends: {len(days.weekends())} {days.weekends()[:2]} ...{days.weekends()[-2:]}'
-    'Weekends: 6 [datetime.date(2020, 12, 5), datetime.date(2020, 12, 6)] ...[datetime.date(2020, 12, 19), datetime.date(2020, 12, 20)]'
-    >>> f'Holidays: {len(days.holidays())}'
-    'Holidays: 1'
+    # initiate  class::`networkdays.Networkdays` 
+    In [4]: days = networkdays.Networkdays(
+                datetime.date(2020, 12, 15),  # start date
+                datetime.date(2020, 12, 31),  # end date
+                HOLIDAYS  # list of Holidays
+            )
+
+    In [5]: days.networkdays()  # return a list os workdays 
+    Out[5]:
+    [datetime.date(2020, 12, 15),
+     datetime.date(2020, 12, 16),
+     datetime.date(2020, 12, 17),
+     datetime.date(2020, 12, 18),
+     datetime.date(2020, 12, 21),
+     datetime.date(2020, 12, 22),
+     datetime.date(2020, 12, 23),
+     datetime.date(2020, 12, 24),
+     datetime.date(2020, 12, 28),
+     datetime.date(2020, 12, 29),
+     datetime.date(2020, 12, 30),
+     datetime.date(2020, 12, 31)]
+
+    In [6]: days.weekends()  # list os Weekends (default = Saturday ans Sunday) 
+    Out[6]:
+    [datetime.date(2020, 12, 19),
+     datetime.date(2020, 12, 20),
+     datetime.date(2020, 12, 26),
+     datetime.date(2020, 12, 27)]
+
+    In [7]: days.holidays()
+    Out[7]: [datetime.date(2020, 12, 25)] # list of holidays 
 
 
 Networkdays.jobschedule()

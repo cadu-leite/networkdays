@@ -5,11 +5,11 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name="python-networkdays",
-    version="0.0.1",
+    version="1.0.1",
     author="Carlos Leite",
     author_email="caduado@gmail.com",
     description="Networkday function like spreadsheet, plus job schedule",
-    keywords='networkdays calendar schedule project',
+    keywords='workdays businessday networkdays diasuteis calendar days schedule excel feriados holidays',
     description_content_type="text/x-rst",
     long_description=long_description,
     long_description_content_type="text/x-rst",
