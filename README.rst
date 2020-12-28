@@ -2,7 +2,6 @@
 Networkdays
 ***********
 
--------------------------------------------
 
 .. image:: https://img.shields.io/pypi/v/python-networkdays.svg?style=flat-square
     :target: https://pypi.org/project/python-networkdays
@@ -76,8 +75,8 @@ Features
 Examples
 ========
 
-`class::Networkdays.networkdays`
---------------------------------
+Class Networkdays.networkdays
+-----------------------------
 
 List business days, weekends and Holidays
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -124,8 +123,8 @@ List business days, weekends and Holidays
     Out[7]: [datetime.date(2020, 12, 25)] # list of holidays 
 
 
-`class::Networkdays.jobschedule`
---------------------------------
+class Networkdays.jobschedule
+-----------------------------
 
 .. code:: python
 
@@ -148,6 +147,7 @@ List business days, weekends and Holidays
     [49, 50, 51, 52, 53, 1, 2, 3, 4, 5, 6]
     >>> f'days: {list(jobschedule.days())[:2]} ... {list(jobschedule.days())[-2:]}'
     'days: [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)] ... [datetime.date(2021, 2, 11), datetime.date(2021, 2, 12)]'
+
 
 Other similar projects
 ======================
