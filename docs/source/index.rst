@@ -77,41 +77,46 @@ Examples
 Networkdays.networkdays()
 -------------------------
 
-.. code:: python
 
-    import datetime
-    from networkdays import networkdays
+.. code-block:: python
+    
+    In [1]: from networkdays import networkdays
 
-    HOLIDAYS  = { datetime.date(2020, 12, 25),}
+    In [2]: import datetime
 
-    day
-    # you have methods to get holidays and weekends date list as well.
-    # here i just got the size of each set
-    print(f'''
-    Bussiness days: {len(days.networkdays())}
-        {days.networkdays()[:2]}
-        ...{days.networkdays()[-2:]}
+    In [3]: HOLIDAYS = { datetime.date(2020, 12, 25) }  # define a Holidays list
 
-    Weekends:       {len(days.weekends())}
-        {days.weekends()[:2]}
-        ...{days.weekends()[-2:]}
+    # initiate  class::`networkdays.Networkdays` 
+    In [4]: days = networkdays.Networkdays(
+                datetime.date(2020, 12, 15),  # start date
+                datetime.date(2020, 12, 31),  # end date
+                HOLIDAYS  # list of Holidays
+            )
 
-    Holidays:       {len(days.holidays())}
-    ''')
+    In [5]: days.networkdays()  # return a list os workdays 
+    Out[5]:
+    [datetime.date(2020, 12, 15),
+     datetime.date(2020, 12, 16),
+     datetime.date(2020, 12, 17),
+     datetime.date(2020, 12, 18),
+     datetime.date(2020, 12, 21),
+     datetime.date(2020, 12, 22),
+     datetime.date(2020, 12, 23),
+     datetime.date(2020, 12, 24),
+     datetime.date(2020, 12, 28),
+     datetime.date(2020, 12, 29),
+     datetime.date(2020, 12, 30),
+     datetime.date(2020, 12, 31)]
 
+    In [6]: days.weekends()  # list os Weekends (default = Saturday ans Sunday) 
+    Out[6]:
+    [datetime.date(2020, 12, 19),
+     datetime.date(2020, 12, 20),
+     datetime.date(2020, 12, 26),
+     datetime.date(2020, 12, 27)]
 
-.. parsed-literal::
-
-
-    Bussiness days: 22
-        [datetime.date(2020, 12, 1), datetime.date(2020, 12, 2)]
-        ...[datetime.date(2020, 12, 30), datetime.date(2020, 12, 31)]
-
-    Weekends:       8
-        [datetime.date(2020, 12, 5), datetime.date(2020, 12, 6)]
-        ...[datetime.date(2020, 12, 26), datetime.date(2020, 12, 27)]
-
-    Holidays:       1
+    In [7]: days.holidays()
+    Out[7]: [datetime.date(2020, 12, 25)] # list of holidays 
 
 
 

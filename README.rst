@@ -76,8 +76,12 @@ Features
 Examples
 ========
 
-Networkdays.networkdays()
--------------------------
+`class::Networkdays.networkdays`
+--------------------------------
+
+List business days, weekends and Holidays
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 .. code-block:: python
     
@@ -120,8 +124,8 @@ Networkdays.networkdays()
     Out[7]: [datetime.date(2020, 12, 25)] # list of holidays 
 
 
-Networkdays.jobschedule()
--------------------------
+`class::Networkdays.jobschedule`
+--------------------------------
 
 .. code:: python
 
