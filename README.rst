@@ -2,20 +2,32 @@
 Networkdays
 ***********
 
+some statistics ...
 
-.. image:: https://img.shields.io/pypi/v/python-networkdays.svg?style=flat-square
++------------------------+----------------------+--------------------+---------------------+
+| Pypi Version           | Doc Status           | Coverage           | Downloads           |
++========================+======================+====================+=====================+
+|  |badge_pypi_version|  |  |badge_doc_status|  |  |badge_coverage|  |  |badge_downloads|  |
++------------------------+----------------------+--------------------+---------------------+
+
+
+.. |badge_pypi_version| image:: https://img.shields.io/pypi/v/python-networkdays.svg?style=flat-square
     :target: https://pypi.org/project/python-networkdays
     :alt: pypi version
 
 
-.. image:: https://readthedocs.org/projects/networkdays/badge/?version=latest
+.. |badge_doc_status| image:: https://readthedocs.org/projects/networkdays/badge/?version=latest
     :target: https://networkdays.readthedocs.io/?badge=latest
     :alt: Documentation Status
 
 
-.. image:: https://codecov.io/gh/cadu-leite/networkdays/branch/master/graph/badge.svg
+.. |badge_coverage| image:: https://codecov.io/gh/cadu-leite/networkdays/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/cadu-leite/networkdays
     :alt: code coverage
+
+.. |badge_downloads| image:: https://img.shields.io/pypi/dm/wagtail-seo
+    :target: https://pypi.org/project/python-networkdays
+    :alt: Downloads on Pypi
 
 -------------------------------------------
 
@@ -172,3 +184,9 @@ I found some others  8(
 
 I will try to keep this list updated...
 
+
+More on ..  
+
+https://networkdays.readthedocs.io/index.html
+
+https://libraries.io/pypi/python-networkdays/sourcerank
