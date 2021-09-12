@@ -1,12 +1,6 @@
 -r requirements.txt
-certifi==2020.4.5.2
-chardet==3.0.4
 codecov==2.1.7
 coverage==5.1
 flake8==3.8.3
-idna==2.9
-mccabe==0.6.1
 pycodestyle==2.6.0
 pyflakes==2.2.0
-requests==2.24.0
-urllib3==1.25.9

@@ -25,9 +25,11 @@ some statistics ...
     :target: https://codecov.io/gh/cadu-leite/networkdays
     :alt: code coverage
 
+
 .. |badge_downloads| image:: https://img.shields.io/pypi/dm/wagtail-seo
     :target: https://pypi.org/project/python-networkdays
     :alt: Downloads on Pypi
+
 
 -------------------------------------------
 
@@ -139,7 +141,8 @@ class Networkdays.jobschedule
 -----------------------------
 
 .. code:: python
-
+    >>> from networkdays import networkdays
+    >>> import datetime
     >>> # Distribute the 600 hrs of effort, starting on december 1, 2020 working 8hrs per day.
     >>> jobschedule = networkdays.JobSchedule(600, 8, datetime.date(2020, 12, 1), networkdays=None)
     >>> job_dates = jobschedule.job_workdays()
