@@ -140,7 +140,8 @@ List business days, weekends and Holidays
 class Networkdays.jobschedule
 -----------------------------
 
-.. code:: python
+.. code-block:: python
+
     >>> from networkdays import networkdays
     >>> import datetime
     >>> # Distribute the 600 hrs of effort, starting on december 1, 2020 working 8hrs per day.
