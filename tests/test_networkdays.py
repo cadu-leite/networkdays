@@ -57,7 +57,7 @@ class TestClassNetworkDays(unittest.TestCase):
             datetime.date(2020, 11, 1),
             datetime.date(2020, 11, 30),
             [datetime.date(2020, 11, 29), ],  # holidays
-            {1, 2, 3, 4, 5, 6})  # week days off
+            {0, 1, 2, 3, 4, 5})  # week days off
         workdays = networkdays.networkdays()
         self.assertEqual(len(workdays), 4, msg='fail weekdaysoff 1')
 
