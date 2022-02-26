@@ -1,85 +1,79 @@
+from calendar import SATURDAY, SUNDAY
 import datetime
 from itertools import groupby
 
+
 class Networkdays:
 
-    def __init__(self, date_start, date_end=None, holidays=set(), weekdaysoff={6, 7}):
+    def __init__(self, date_start, date_end=None, holidays=set(), weekdaysoff={SATURDAY, SUNDAY}):
         self.date_start = date_start
-        self.date_end = date_end
+        self.date_end = self.valid_date_end(date_end)
         self.holidays_set = holidays
         self.weekdaysoff = weekdaysoff
 
+    def valid_date_end(self, date_end):
+        if not date_end:
+            date_end = self.date_start.replace(
+                year=self.date_start.year + 1
+            )
+        return date_end
+
+    def dates_range(self):
+        date_diff = self.date_end - self.date_start
+        dates = {
+            self.date_start + datetime.timedelta(days=days)
+            for days in range(date_diff.days + 1)
+        }
+        return dates
+
     def networkdays(self):
         '''
-        NetWorkDays like Excel Networkdays function.
-        given 2 dates, the return will the number of days between dates, minus
-        holidays, e week days off (ex.: saturday and sunday).
+        NetWorkDays is like the Excel function Networkdays.
+        Given 2 dates, the return will be the number of days between the dates,
+        minus the holidays and days off for the week (ex.: saturday and sunday).
 
-        The `weekdaysoff` is a per week ISO days list where Monday is 1 and sunday is 7.
-        The holidays may be any single date, datetime.date object, in a year.
+        The holidays can be any date, a datetime.date object, in a year.
 
         Args:
             date_start (datetime.date): initial date
             date_end (datetime.date): end date, or if none, is the last day of the
                 date_start year.
             workdays (set): set (list) of working days in ISO format,
-                Monday is 1 and Sunday is 7.
+                Monday is 0 and Sunday is 6.
             holidays (set): datetime object set, indicating days off.
             weekdaysoff (set): set of weekdays not working,
-                default is Saturday and Sunday {6,7}.
+                default is Saturday and Sunday {5, 6}.
 
         returns:
             list of work days.
 
-        ex.:
+        usage ex.:
             networkdays(
                 datetime.date(2020,1,1),
                 datetime.date(2020,2,31),
                 holiday=datetime.date(2020,1,1),
-                weekdaysoff={6,7}
+                weekdaysoff={5, 6}
             )
 
         '''
-
-        # if not dte_end, assume 1 year after (by calendar) date start
-        if self.date_end is None:
-            self.date_end = datetime.date(
-                self.date_start.year + 1,
-                self.date_start.month,
-                self.date_start.day
-            )
-
-        date_diff = self.date_end - self.date_start
-        dates = {
-            self.date_start + datetime.timedelta(days=days)
-            for days in range(0, (date_diff.days + 1))
-        }
-
-        dates = dates.difference(self.weekends())
-        dates = dates.difference(self.holidays())
-        dates = sorted(dates)
-
+        dates = self.dates_range()
+        dates.difference_update(self.weekends(), self.holidays())
         return dates
+
+    def is_date_weekend(self, date) -> bool:
+        return date.weekday() in self.weekdaysoff
 
     def weekends(self):
-        date_diff = self.date_end - self.date_start
-        dates = [
-            self.date_start + datetime.timedelta(days=days)
-            for days in range(0, (date_diff.days + 1))
-            if (self.date_start + datetime.timedelta(days=days)).isoweekday()
-            in self.weekdaysoff
-        ]
-        dates = sorted(dates)
-        return dates
+        dates = self.dates_range()
+        dates = filter(self.is_date_weekend, dates)
+        return sorted(dates)
+
+    def is_date_included(self, date) -> bool:
+        return self.date_end >= date >= self.date_start
 
     def holidays(self):
-
-        return sorted(list(
-            filter(
-                lambda d: self.date_end >= d >= self.date_start,
-                self.holidays_set
-            )
-        ))
+        l = filter(self.is_date_included, self.holidays_set)
+        return sorted(l)
 
 
 class JobSchedule:
