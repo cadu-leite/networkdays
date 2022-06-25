@@ -5,7 +5,7 @@ with open("README.rst", "r") as fh:
 
 setuptools.setup(
     name="python-networkdays",
-    version="1.1",
+    version="1.2",
 
     author="Carlos Leite",
     author_email="caduado@gmail.com",
