@@ -1,6 +1,7 @@
 import datetime
 from itertools import groupby
 
+
 class Networkdays:
 
     def __init__(self, date_start, date_end=None, holidays=set(), weekdaysoff={6, 7}):
@@ -22,10 +23,8 @@ class Networkdays:
             date_start (datetime.date): initial date
             date_end (datetime.date): end date, or if none, is the last day of the
                 date_start year.
-            workdays (set): set (list) of working days in ISO format,
-                Monday is 1 and Sunday is 7.
-            holidays (set): datetime object set, indicating days off.
-            weekdaysoff (set): set of weekdays not working,
+            holidays (sipytho net): list of datetime object, indicating days off.
+            weekdaysoff (set): list of weekdays not working,
                 default is Saturday and Sunday {6,7}.
 
         returns:
@@ -41,7 +40,7 @@ class Networkdays:
 
         '''
 
-        # if not dte_end, assume 1 year after (by calendar) date start
+        # if not date_end, assume 1 year after (by calendar) date start
         if self.date_end is None:
             self.date_end = datetime.date(
                 self.date_start.year + 1,
