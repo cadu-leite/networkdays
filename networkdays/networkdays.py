@@ -1,6 +1,7 @@
 import datetime
 from itertools import groupby
 
+
 class Networkdays:
 
     def __init__(self, date_start, date_end=None, holidays=set(), weekdaysoff={6, 7}):
