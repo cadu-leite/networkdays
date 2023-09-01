@@ -68,13 +68,7 @@ class Networkdays:
         ]
 
     def holidays(self):
-
-        return sorted(list(
-            filter(
-                lambda d: self.date_end >= d >= self.date_start,
-                self.holidays_set
-            )
-        ))
+        return sorted(d for d in self.holidays_set if self.date_end >= d >= self.date_start)
 
 
 class JobSchedule:
