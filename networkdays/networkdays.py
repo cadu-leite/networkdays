@@ -62,14 +62,12 @@ class Networkdays:
 
     def weekends(self):
         date_diff = self.date_end - self.date_start
-        dates = [
+        return [
             self.date_start + datetime.timedelta(days=days)
             for days in range(0, (date_diff.days + 1))
             if (self.date_start + datetime.timedelta(days=days)).isoweekday()
             in self.weekdaysoff
         ]
-        dates = sorted(dates)
-        return dates
 
     def holidays(self):
 
