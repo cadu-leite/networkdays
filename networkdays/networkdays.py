@@ -52,7 +52,10 @@ class Networkdays:
         dates = []
         for i in range(0, date_diff.days + 1):
             current_date = self.date_start + datetime.timedelta(days=i)
-            if current_date not in exclude:
+            if (
+                current_date.isoweekday() not in self.weekdaysoff
+                and current_date not in self.holidays_set
+            ):
                 dates.append(current_date)
 
         return dates
