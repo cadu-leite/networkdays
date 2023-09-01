@@ -48,15 +48,13 @@ class Networkdays:
                 self.date_start.day
             )
 
+        exclude = set(self.holidays() + self.weekends())
         date_diff = self.date_end - self.date_start
-        dates = {
-            self.date_start + datetime.timedelta(days=days)
-            for days in range(0, (date_diff.days + 1))
-        }
-
-        dates = dates.difference(self.weekends())
-        dates = dates.difference(self.holidays())
-        dates = sorted(dates)
+        dates = []
+        for i in range(0, date_diff.days + 1):
+            current_date = self.date_start + datetime.timedelta(days=i)
+            if current_date not in exclude:
+                dates.append(current_date)
 
         return dates
 
