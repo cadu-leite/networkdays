@@ -7,8 +7,8 @@ class Networkdays:
     def __init__(self, date_start, date_end=None, holidays=set(), weekdaysoff={6, 7}):
         self.date_start = date_start
         self.date_end = date_end
-        self.holidays_set = holidays
-        self.weekdaysoff = weekdaysoff
+        self.holidays_set = set(holidays)
+        self.weekdaysoff = set(weekdaysoff)
 
     def networkdays(self):
         '''
@@ -48,7 +48,6 @@ class Networkdays:
                 self.date_start.day
             )
 
-        exclude = set(self.holidays() + self.weekends())
         date_diff = self.date_end - self.date_start
         dates = []
         for i in range(0, date_diff.days + 1):
