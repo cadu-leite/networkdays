@@ -123,4 +123,7 @@ class TestCommandLineInterface(unittest.TestCase):
                 self.assertIn('usage: __main__.py [-h]', stdout)
                 self.assertIn('Bussiness Days Calendar & JobScheduling', stdout)
                 self.assertIn('positional arguments:', stdout)
-                self.assertIn('options:', stdout)
+                self.assertTrue(
+                    'optional arguments:' in stdout or 'options:' in stdout,
+                    "Help message should contain a header for optional arguments or options"
+                )
