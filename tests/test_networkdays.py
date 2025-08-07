@@ -103,3 +103,48 @@ class TestClassNetworkDays(unittest.TestCase):
 
         self.assertEqual(ndays_1.networkdays(), ndays_2.networkdays(), msg='fail date_end as optional param')
 
+    def test_last_workday_of_month(self):
+        '''
+        Test the last_workday_of_month method.
+        '''
+        # A dummy date range for the Networkdays instance, not used by the method
+        start_date = datetime.date(2020, 1, 1)
+        end_date = datetime.date(2020, 12, 31)
+
+        # Test case 1: Regular month, no holidays
+        # October 2020 ends on a Saturday (31st). Last workday should be Friday 30th.
+        networkdays = Networkdays(start_date, end_date)
+        last_workday = networkdays.last_workday_of_month(2020, 10)
+        self.assertEqual(last_workday, datetime.date(2020, 10, 30))
+
+        # Test case 2: Month where last day is a Friday
+        # September 2020 ends on a Wednesday 30th. Last workday should be 30th.
+        last_workday = networkdays.last_workday_of_month(2020, 9)
+        self.assertEqual(last_workday, datetime.date(2020, 9, 30))
+
+        # Test case 3: Month where last day is a holiday
+        # December 2020, let's say 31st is a holiday. Last workday should be 30th.
+        holidays = {datetime.date(2020, 12, 31)}
+        networkdays = Networkdays(start_date, end_date, holidays=holidays)
+        last_workday = networkdays.last_workday_of_month(2020, 12)
+        self.assertEqual(last_workday, datetime.date(2020, 12, 30))
+
+        # Test case 4: Month where last few days are non-workdays
+        # December 2020, 31st (Thu) and 30th (Wed) are holidays. 29th is Tuesday
+        holidays = {datetime.date(2020, 12, 31), datetime.date(2020, 12, 30)}
+        networkdays = Networkdays(start_date, end_date, holidays=holidays)
+        last_workday = networkdays.last_workday_of_month(2020, 12)
+        self.assertEqual(last_workday, datetime.date(2020, 12, 29))
+
+        # Test case 5: A month with no workdays
+        holidays = {datetime.date(2021, 2, d) for d in range(1, 29)}
+        networkdays = Networkdays(start_date, end_date, holidays=holidays)
+        last_workday = networkdays.last_workday_of_month(2021, 2)
+        self.assertIsNone(last_workday)
+
+        # Test case 6: Custom weekdays off
+        # Last day of Nov 2020 is Monday 30th. With Monday off, last workday is Friday 27th.
+        weekdaysoff = {1, 6, 7} # Monday, Saturday, Sunday
+        networkdays = Networkdays(start_date, end_date, weekdaysoff=weekdaysoff)
+        last_workday = networkdays.last_workday_of_month(2020, 11)
+        self.assertEqual(last_workday, datetime.date(2020, 11, 27))

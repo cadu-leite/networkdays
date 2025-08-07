@@ -80,6 +80,22 @@ class Networkdays:
             )
         ))
 
+    def last_workday_of_month(self, year, month):
+        '''
+        Return the last workday of a given month.
+        It uses the holidays and weekdaysoff from the Networkdays instance.
+        '''
+        import calendar
+        _, num_days = calendar.monthrange(year, month)
+
+        for day in range(num_days, 0, -1):
+            date_cursor = datetime.date(year, month, day)
+            if date_cursor.isoweekday() not in self.weekdaysoff and \
+               date_cursor not in self.holidays_set:
+                return date_cursor
+
+        return None
+
 
 class JobSchedule:
 
