@@ -54,10 +54,18 @@ Job schedule:
     Calculate the period for a given job hours, based on `Networdays`.
 
 
+=======
 .. contents:: Table of Contents
 
 
+Code of Conduct
+===============
+
+Everyone interacting in the project's codebase, issue trackers, chat rooms, and mailing lists is expected to follow the `Code of Conduct <CODE_OF_CONDUCT.md>`_.
+
+
 Installation
+============
 ============
 
 python-networkdays can be installed from PyPI using pip
