@@ -1,5 +1,5 @@
 -r requirements.txt
-codecov==2.1.7
+codecov==2.1.13
 coverage==5.1
 flake8==3.8.3
 pycodestyle==2.6.0

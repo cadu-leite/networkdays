@@ -54,7 +54,6 @@ Job schedule:
     Calculate the period for a given job hours, based on `Networdays`.
 
 
-=======
 .. contents:: Table of Contents
 
 
@@ -65,7 +64,6 @@ Everyone interacting in the project's codebase, issue trackers, chat rooms, and 
 
 
 Installation
-============
 ============
 
 python-networkdays can be installed from PyPI using pip
