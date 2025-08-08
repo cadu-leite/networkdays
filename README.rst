@@ -40,10 +40,6 @@ some statistics ...
     :target: https://pypi.org/project/python-networkdays
     :alt: Downloads on Pypi
 
-.. image:: docs/source/_static/Necto_Horizontal.svg
-   :alt: Necto Logo
-   :align: center
-   :width: 400px
 
 
 ---
@@ -186,3 +182,9 @@ License
 =======
 
 This project is licensed under the MIT license. See the `LICENSE` file for more details.
+
+
+.. image:: docs/source/_static/Necto_Horizontal.svg
+   :alt: Necto Logo
+   :align: center
+   :width: 400px
