@@ -10,12 +10,12 @@ setuptools.setup(
     author="Carlos Leite",
     author_email="",
 
-    description="Business days (workdays) between two date, like `NetworkDays` function used on spreadsheets and more.",
+    description="Calculate Business days (workdays) between two date, like `NetworkDays` function used on spreadsheets. Schedule based on hours and business days",
 
     long_description=long_description,
     long_description_content_type="text/x-rst",
 
-    keywords=["workdays", "business day", "networkdays", "diasuteis", "calendar", "days", "schedule", "excel", "feriados", "holidays"],
+    keywords=['business days', 'workdays', 'working days', 'networkdays', 'datetime', 'calendar', 'excel', 'schedule', 'calculate', 'holidays' ],
 
     url="https://github.com/cadu-leite/networkdays",
     packages=setuptools.find_packages(),
@@ -38,9 +38,9 @@ setuptools.setup(
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: Implementation :: CPython",
 
-        "Topic :: Office/Business ",
         "Topic :: Software Development",
         "Topic :: Utilities",
+        "Topic :: Office/Business"
     ],
     python_requires=">=3.6",
 )

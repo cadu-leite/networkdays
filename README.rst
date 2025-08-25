@@ -1,10 +1,11 @@
 
-********************
-Python - NetworkDays
-********************
+****************************************************************
+Python NetworkDays - calculate business/workday dates & Schedule
+****************************************************************
 
-A lean and powerful Python library for business day calculations
-----------------------------------------------------------------
+
+A lean and powerful Python library for business day calculations and schedule
+-----------------------------------------------------------------------------
 
 
 No dependencies, just Python. Simple, fast, and efficient
