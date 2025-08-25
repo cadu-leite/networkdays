@@ -1,16 +1,15 @@
 
-.. raw:: html
+********************
+Python - NetworkDays
+********************
 
-    <h1 align="center">🐍 networkdays</h1>
+A lean and powerful Python library for business day calculations
+----------------------------------------------------------------
 
-    <p align="center">
-        <strong>A lean and powerful Python library for business day calculations.</strong>
-    </p>
 
-    <p align="center">
-        No dependencies, just Python. Simple, fast, and efficient.
-    </p>
+No dependencies, just Python. Simple, fast, and efficient
 
+--------------------------------------------------------------------------------------------
 
 some statistics ...
 
@@ -42,14 +41,14 @@ some statistics ...
 
 
 
----
+--------------------------------------------------------------------------------------------
 
 **Tired of heavy libraries for simple date calculations?**
 
 `networkdays` is the solution you've been looking for. A pure Python library, **with no dependencies**, to calculate business days between dates, quickly and efficiently. Ideal for Python developers and data scientists who value simplicity and performance.
 
 Why choose `networkdays`?
-================================
+=========================
 
 *   **🚀 Lightweight and Fast:** Without the weight of external dependencies. Perfect for microservices, scripts, and projects where every millisecond counts.
 *   **🧘‍♀️ Simple and Intuitive:** A clear and straightforward API that resembles the spreadsheet functions you already know.
@@ -57,7 +56,7 @@ Why choose `networkdays`?
 *   **📅 Project Planning:** Calculate work schedules based on effort hours and business days.
 
 Get started now!
-====================
+================
 
 Install `networkdays` with `pip` and start simplifying your date calculations today.
 
@@ -69,10 +68,10 @@ Install `networkdays` with `pip` and start simplifying your date calculations to
     Note that the package name on PyPI is `python-networkdays`, but you import it as `networkdays`.
 
 Practical Examples
-=================
+==================
 
 Calculate business days between two dates
-------------------------------------
+-----------------------------------------
 
 Just like in your favorite spreadsheet, calculate the working days, disregarding weekends and holidays.
 
@@ -161,7 +160,7 @@ Work on Saturdays? No problem. `networkdays` adapts to your needs.
 
 
 Complete Documentation
-=====================
+======================
 
 For more details and examples, access our official documentation:
 
@@ -174,7 +173,7 @@ Contributions
 Contributions are always welcome! Feel free to open an issue or submit a pull request.
 
 Code of Conduct
-=================
+===============
 
 Everyone interacting with the project must follow our `Code of Conduct <CODE_OF_CONDUCT.md>`_.
 

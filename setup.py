@@ -8,7 +8,7 @@ setuptools.setup(
     version="1.2",
 
     author="Carlos Leite",
-    author_email="caduado@gmail.com",
+    author_email="",
 
     description="Business days (workdays) between two date, like `NetworkDays` function used on spreadsheets and more.",
 
